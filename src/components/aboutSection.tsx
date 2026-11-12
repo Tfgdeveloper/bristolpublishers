@@ -68,7 +68,7 @@ const aboutStyles = `
   }
 
   /* ═══════════════════════════════════
-     ABOUT SECTION — BASE LAYOUT
+     ABOUT SECTION,  BASE LAYOUT
      ═══════════════════════════════════ */
 
   .about-section {
@@ -259,7 +259,7 @@ const aboutStyles = `
     outline-offset: 3px;
   }
 
-  /* ── Right col — image fills its column ── */
+  /* ── Right col,  image fills its column ── */
   .about-right {
     position: relative;
     display: flex;
@@ -537,7 +537,7 @@ const aboutStyles = `
   }
 `;
 
-/* Sparks around the phone CTA — red/pink so they show on the light background */
+/* Sparks around the phone CTA,  red/pink so they show on the light background */
 const CTA_PARTICLES = Array.from({ length: 10 }, (_, i) => {
   const angle = (i / 10) * Math.PI * 2;
   const dist = 34 + (i % 3) * 10;
@@ -609,7 +609,7 @@ const AboutSection: React.FC = () => {
             <span className="about-eyebrow-text">ABOUT US</span>
           </div>
 
-          {/* Main grid — 60 / 40 */}
+          {/* Main grid,  60 / 40 */}
           <div className="about-grid">
 
             {/* ── LEFT COL (60%) ── */}
@@ -680,13 +680,13 @@ const AboutSection: React.FC = () => {
               <div className="about-divider" />
 
               <div className="about-cta-row">
-                 <button
-                type="button"
-                className="hero-cta-primary"
-                onClick={() => openQuoteModal()}
-              >
-                GET A QUOTE
-              </button>
+                <button
+                  type="button"
+                  className="hero-cta-primary"
+                  onClick={() => openQuoteModal()}
+                >
+                  GET A QUOTE
+                </button>
 
                 <span className="about-cta-btn-outer">
                   {CTA_PARTICLES.map((p, i) => (
@@ -719,7 +719,7 @@ const AboutSection: React.FC = () => {
               </div>
             </div>
 
-            {/* ── RIGHT COL (40%) — Image ── */}
+            {/* ── RIGHT COL (40%),  Image ── */}
             <div
               className="about-right"
               style={{
@@ -737,7 +737,8 @@ const AboutSection: React.FC = () => {
                 <div className="about-book-float about-img-wrap">
                   <img
                     src="/images/About1.webp"
-                    alt="Bristol Publishers — Author Book"
+                    alt="Bristol-Publishers,Author-Book"
+                    title="Bristol Publishers, Author Book"
                     className="about-img"
                   />
                   <div className="about-img-shimmer" />

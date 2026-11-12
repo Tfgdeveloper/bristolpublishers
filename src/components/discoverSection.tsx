@@ -145,7 +145,7 @@ const DiscoverSection: React.FC = () => {
 
                 <div className="flex justify-between items-start mb-11 relative z-10">
                     <p className="max-w-[340px] text-white/50 text-[1.2rem] leading-tight pt-1.5">
-                        From deep-dive interviews to casual banter and true crime thrills — we've got something for every listener.
+                        From deep-dive interviews to casual banter and true crime thrills,  we've got something for every listener.
                     </p>
                     <div className="text-right">
                         <h2 className="font-['Bebas_Neue',sans-serif] text-[clamp(4.8rem,7vw,6.2rem)] leading-[0.95] text-white tracking-tight">

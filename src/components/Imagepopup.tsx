@@ -7,9 +7,10 @@ import { Link } from "react-router-dom";
 /*  Settings                                                           */
 /* ------------------------------------------------------------------ */
 const IMAGE_SRC = "/images/frankfurtpopup.jpg";
-const IMAGE_ALT = "This Halloween, give your book a treat: 50% off all publishing services";
-const LINK_HREF = ""; // optional: set a URL to make the image clickable, e.g. "/pricing"
-const SHOW_ONCE_PER_SESSION = false; // true = don't show again until the browser tab is closed
+const IMAGE_TITLE = "This Halloween, give your book a treat: 50% off all publishing services";
+const IMAGE_ALT = IMAGE_TITLE.replace(/\s+/g, "-");
+const LINK_HREF = "";
+const SHOW_ONCE_PER_SESSION = false;
 const STORAGE_KEY = "image-popup-seen";
 
 const smoothEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -58,6 +59,7 @@ export default function ImagePopup() {
         <img
             src={IMAGE_SRC}
             alt={IMAGE_ALT}
+            title={IMAGE_TITLE}
             className="block max-h-[calc(100vh-48px)] w-auto max-w-full rounded-[18px] object-contain"
         />
     );
@@ -71,7 +73,7 @@ export default function ImagePopup() {
                     transition={{ duration: 0.35 }}
                     onClick={close}
                 >
-                    
+
                     <motion.div
                         role="dialog"
                         aria-modal="true"
@@ -99,7 +101,7 @@ export default function ImagePopup() {
                             image
                         )}
                     </motion.div>
-                   
+
                 </motion.div>
             )}
         </AnimatePresence>

@@ -54,7 +54,7 @@ const CREATORS: Creator[] = [
         accent: "#8040c0",
         gradient: "linear-gradient(160deg, #8040c0 0%, #6020a0 100%)"
     },
-        {
+    {
         name: "Michael Torres",
         show: "The Night Grind",
         img: "/images/creator-4.jpg",
@@ -100,7 +100,7 @@ const CreatorsSection: React.FC = () => {
 
                 <div className="relative z-10 text-center mb-16 max-w-3xl mx-auto">
                     <h2 className="font-['Bebas_Neue',sans-serif] text-[clamp(4.8rem,7vw,6.2rem)] leading-[0.95] text-white tracking-tight mb-6">
-                        Behind Every Podcast <br/> <span className="text-[#e85d00]">is a Bold Voice.</span>
+                        Behind Every Podcast <br /> <span className="text-[#e85d00]">is a Bold Voice.</span>
                     </h2>
                     <p className="text-white/50 text-[1.25rem] leading-tight">
                         We feature new podcasters every month and share their unique stories and content with the world.
@@ -133,7 +133,8 @@ const CreatorsSection: React.FC = () => {
                                 >
                                     <img
                                         src={creator.img}
-                                        alt={creator.name}
+                                        alt={creator.name.replace(/\s+/g, "-")}
+                                        title={creator.name}
                                         className="w-full h-full object-cover object-top"
                                         onError={(e) => {
                                             const target = e.currentTarget;

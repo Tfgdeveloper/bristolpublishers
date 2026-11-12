@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
-export  interface PolicySection {
+export interface PolicySection {
   id: string;
   title: string;
   content: React.ReactNode;
@@ -19,9 +19,9 @@ interface PolicyLayoutProps {
 }
 
 const POLICIES: { key: PolicyKey; label: string; to: string }[] = [
-  { key: "privacy", label: "Privacy Policy",   to: "/privacy-policy" },
-  { key: "terms",   label: "Terms of Service", to: "/terms-of-service" },
-  { key: "refund",  label: "Refund Policy",    to: "/refund-policy" },
+  { key: "privacy", label: "Privacy Policy", to: "/privacy-policy" },
+  { key: "terms", label: "Terms of Service", to: "/terms-of-service" },
+  { key: "refund", label: "Refund Policy", to: "/refund-policy" },
 ];
 
 const policyStyles = `
@@ -171,7 +171,7 @@ const policyStyles = `
     .pl-section h2 { font-size: 1.3rem; }
   }
 
-  /* ════ LAPTOP 1024px+ — sticky contents list ════ */
+  /* ════ LAPTOP 1024px+,  sticky contents list ════ */
   @media (min-width: 1024px) {
     .pl-container { padding: 0 2.5rem; }
     .pl-title     { font-size: 3.8rem; }
@@ -272,8 +272,8 @@ export const ContactCard: React.FC = () => (
 
 const DESCRIPTIONS: Record<PolicyKey, string> = {
   privacy: "Learn how Bristol Publishers collects, uses and protects your personal information when you use our website and services.",
-  terms:   "Read the terms and conditions that apply to using the Bristol Publishers website and our book publishing services.",
-  refund:  "Read the Bristol Publishers refund policy to learn how refunds work for our book publishing services, including eligibility, timelines and how to request one.",
+  terms: "Read the terms and conditions that apply to using the Bristol Publishers website and our book publishing services.",
+  refund: "Read the Bristol Publishers refund policy to learn how refunds work for our book publishing services, including eligibility, timelines and how to request one.",
 };
 
 
@@ -284,67 +284,67 @@ const PolicyLayout: React.FC<PolicyLayoutProps> = ({ current, title, updated, in
   }, [current]);
 
   return (
-  <>
-  <title>{`${title} | Bristol Publishers`}</title>
-    <meta name="description" content={DESCRIPTIONS[current]} />
-    <style>{policyStyles}</style>
-    <style>{policyStyles}</style>
+    <>
+      <title>{`${title} | Bristol Publishers`}</title>
+      <meta name="description" content={DESCRIPTIONS[current]} />
+      <style>{policyStyles}</style>
+      <style>{policyStyles}</style>
 
-    <main className="pl-page">
-      <header className="pl-hero">
-        <div className="pl-container">
-          <Link to="/" className="pl-back">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <polyline points="15 18 9 12 15 6" />
-            </svg>
-            Back to home
-          </Link>
-          <h1 className="pl-title">{title}</h1>
-          <p className="pl-updated">Last updated {updated}</p>
+      <main className="pl-page">
+        <header className="pl-hero">
+          <div className="pl-container">
+            <Link to="/" className="pl-back">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+              Back to home
+            </Link>
+            <h1 className="pl-title">{title}</h1>
+            <p className="pl-updated">Last updated {updated}</p>
 
-          <nav className="pl-switch" aria-label="Policies">
-            {POLICIES.map(p => (
-              <Link
-                key={p.key}
-                to={p.to}
-                className={p.key === current ? "active" : undefined}
-                aria-current={p.key === current ? "page" : undefined}
-              >
-                {p.label}
-              </Link>
+            <nav className="pl-switch" aria-label="Policies">
+              {POLICIES.map(p => (
+                <Link
+                  key={p.key}
+                  to={p.to}
+                  className={p.key === current ? "active" : undefined}
+                  aria-current={p.key === current ? "page" : undefined}
+                >
+                  {p.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+
+        <div className="pl-container pl-body">
+          <aside className="pl-toc" aria-label="On this page">
+            <p className="pl-toc-title">On this page</p>
+            <ol>
+              {sections.map(s => (
+                <li key={s.id}>
+                  <a href={`#${s.id}`} onClick={(e) => scrollToId(e, s.id)}>{s.title}</a>
+                </li>
+              ))}
+            </ol>
+          </aside>
+
+          <article className="pl-article">
+            <div className="pl-intro">{intro}</div>
+
+            {sections.map((s, i) => (
+              <section key={s.id} id={s.id} className="pl-section">
+                <h2>
+                  <span className="pl-num">{String(i + 1).padStart(2, "0")}</span>
+                  {s.title}
+                </h2>
+                {s.content}
+              </section>
             ))}
-          </nav>
+          </article>
         </div>
-      </header>
-
-      <div className="pl-container pl-body">
-        <aside className="pl-toc" aria-label="On this page">
-          <p className="pl-toc-title">On this page</p>
-          <ol>
-            {sections.map(s => (
-              <li key={s.id}>
-                <a href={`#${s.id}`} onClick={(e) => scrollToId(e, s.id)}>{s.title}</a>
-              </li>
-            ))}
-          </ol>
-        </aside>
-
-        <article className="pl-article">
-          <div className="pl-intro">{intro}</div>
-
-          {sections.map((s, i) => (
-            <section key={s.id} id={s.id} className="pl-section">
-              <h2>
-                <span className="pl-num">{String(i + 1).padStart(2, "0")}</span>
-                {s.title}
-              </h2>
-              {s.content}
-            </section>
-          ))}
-        </article>
-      </div>
-    </main>
-  </>
+      </main>
+    </>
   );
 };
 

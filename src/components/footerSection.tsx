@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 
 const footerStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap');
@@ -42,8 +42,14 @@ const footerStyles = `
   .footer-link:hover { color: #FF4545; }
   .footer-link:focus-visible { outline: 2px solid #FF4545; outline-offset: 3px; border-radius: 3px; }
 
+  /* ── ACTIVE LINK (current page) ── */
+  .footer-link.active {
+    color: #FF4545;
+    font-weight: 500;
+  }
+
   /* ════════════════════════════════════
-     BASE — Small Mobile (≤ 479px)
+     BASE,  Small Mobile (≤ 479px)
      ════════════════════════════════════ */
   .ft-footer {
     background: linear-gradient(180deg, #FFFFFF 0%, #FFF9F9 25%, #FFE8E8 55%, #FFD6D6 80%, #FFFFFF 100%);
@@ -132,6 +138,39 @@ const footerStyles = `
   .ft-contact .ft-phone-btn svg {
     color: #FF4545;
     animation: ftPhoneRing 2s ease-in-out infinite;
+  }
+
+  /* ── Social icons ── */
+  .ft-social {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .ft-social a {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,69,69,0.1);
+    border: 1px solid rgba(255,69,69,0.25);
+    color: #FF4545;
+    text-decoration: none;
+    transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .ft-social a:hover {
+    background: #FF4545;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,69,69,0.35);
+  }
+  .ft-social a:focus-visible { outline: 2px solid #FF4545; outline-offset: 3px; }
+  .ft-social svg { width: 18px; height: 18px; }
+  @media (min-width: 1920px) {
+    .ft-social   { gap: 16px; margin-top: 28px; }
+    .ft-social a { width: 54px; height: 54px; }
+    .ft-social svg { width: 24px; height: 24px; }
   }
 
   .ft-nav-cols {
@@ -283,38 +322,36 @@ const footerStyles = `
   }
 `;
 
-/* type "section" = scroll to a section on the landing page
-   type "page"    = go to a separate route                   */
-type FooterLink = { label: string; type: "section" | "page"; to: string };
+/* Har link ab apne route (page) par redirect karta hai — App.tsx ke routes ke mutabiq */
+type FooterLink = { label: string; to: string };
 
 const NAV_COLS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Quick Nav",
     links: [
-      { label: "Home",      type: "section", to: "home" },
-      { label: "About Us",  type: "section", to: "about" },
-      { label: "Services",  type: "section", to: "services" },
-      { label: "Portfolio", type: "section", to: "portfolio" },
-      { label: "Contact",   type: "section", to: "contact" },
+      { label: "Home", to: "/" },
+      { label: "About Us", to: "/about" },
+      { label: "Portfolio", to: "/portfolio" },
+      { label: "Contact", to: "/contact" },
     ],
   },
   {
     title: "Services",
     links: [
-      { label: "Ghostwriting",          type: "section", to: "services" },
-      { label: "Editing & Proofreading", type: "section", to: "services" },
-      { label: "Cover Design",          type: "section", to: "services" },
-      { label: "Book Publishing",       type: "section", to: "services" },
-      { label: "Book Marketing",        type: "section", to: "services" },
-      { label: "Audiobook Production",  type: "section", to: "services" },
+      { label: "Ghostwriting", to: "/services/ghostwriting" },
+      { label: "Editing & Formatting", to: "/services/formatting" },
+      { label: "Cover Design", to: "/services/cover-design" },
+      { label: "Book Publishing", to: "/services/publishing" },
+      { label: "Book Marketing", to: "/services/marketing" },
+      { label: "Audiobook Production", to: "/services/audio-book" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy",   type: "page", to: "/privacy-policy" },
-      { label: "Terms of Service", type: "page", to: "/terms-of-service" },
-      { label: "Refund Policy",    type: "page", to: "/refund-policy" },
+      { label: "Privacy Policy", to: "/privacy-policy" },
+      { label: "Terms of Service", to: "/terms-of-service" },
+      { label: "Refund Policy", to: "/refund-policy" },
     ],
   },
 ];
@@ -325,26 +362,25 @@ const FooterSection: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  /* On the landing page: smooth-scroll. On any other page: go to "/#id"
-     (ScrollManager then scrolls to the section once it has rendered). */
-  const goToSection = (e: React.MouseEvent, id: string) => {
-    e.preventDefault();
-    if (pathname === "/") {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      window.history.replaceState(null, "", `#${id}`);
-    } else {
-      navigate(`/#${id}`);
+  /* Agar user pehle se usi page par hai to smooth scroll top par,
+     warna normal redirect (ScrollToTop naye page ko top se kholta hai) */
+  const handleClick = (e: React.MouseEvent, to: string) => {
+    if (pathname === to) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  const renderLink = (link: FooterLink) =>
-    link.type === "section" ? (
-      <a href={`/#${link.to}`} className="footer-link" onClick={(e) => goToSection(e, link.to)}>
-        {link.label}
-      </a>
-    ) : (
-      <Link to={link.to} className="footer-link">{link.label}</Link>
-    );
+  const renderLink = (link: FooterLink) => (
+    <NavLink
+      to={link.to}
+      end={link.to === "/"}
+      className={({ isActive }) => (isActive ? "footer-link active" : "footer-link")}
+      onClick={(e) => handleClick(e, link.to)}
+    >
+      {link.label}
+    </NavLink>
+  );
 
   return (
     <>
@@ -362,9 +398,19 @@ const FooterSection: React.FC = () => {
 
             <div className="ft-logo-col">
               <div className="ft-logo-wrap">
-                <a href="/#home" onClick={(e) => goToSection(e, "home")}>
-                  <img src="/images/footerlogo.png" alt="Bristol Publishers" />
-                </a>
+                <Link
+                  to="/"
+                  onClick={(e) => {
+                    if (pathname === "/") {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    } else {
+                      navigate("/");
+                    }
+                  }}
+                >
+                  <img src="/images/footerlogo.png" alt="Bristol-Publishers" title="Bristol Publishers" />
+                </Link>
               </div>
               <p className="ft-tagline">
                 Bristol Publishers handle the complexity of publishing so your focus remains on creativity while we manage execution. Because finishing a book is not the end, it's the transition from creation to recognition.
@@ -382,27 +428,43 @@ const FooterSection: React.FC = () => {
                   </svg>
                   info@bristolpublishers.com
                 </a>
-               <div className="footer-link flex items-start gap-2 font-bold">
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className="mt-1 shrink-0"
-  >
-    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
+                <div className="footer-link flex items-start gap-2 font-bold">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="mt-1 shrink-0"
+                  >
+                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
 
-  <span className="font-semibold">
-    1919 Taylor Street STE F<br />
-    Houston, TX 77007
-  </span>
-</div>
+                  <span className="font-semibold">
+                    1919 Taylor Street STE F<br />
+                    Houston, TX 77007
+                  </span>
+                </div>
+              </div>
+
+              {/* ── Social links ── */}
+              <div className="ft-social">
+                <a href="https://www.facebook.com/BristolPublishers" target="_blank" rel="noopener noreferrer" aria-label="Bristol Publishers on Facebook" title="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M14 8.5V6.6c0-.8.2-1.3 1.4-1.3H17V2.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.5v3.4h2.8V22H14v-10.1h2.8l.4-3.4H14z" />
+                  </svg>
+                </a>
+                <a href="https://www.instagram.com/bristolpublishers1/" target="_blank" rel="noopener noreferrer" aria-label="Bristol Publishers on Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4.2" />
+                    <circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none" />
+                  </svg>
+                </a>
               </div>
             </div>
 
@@ -426,7 +488,7 @@ const FooterSection: React.FC = () => {
             <p className="ft-copyright">©2026 Bristol Publishers. All Rights Reserved.</p>
             <div className="ft-legal-links">
               {LEGAL_LINKS.map(l => (
-                <Link key={l.label} to={l.to} className="footer-link">{l.label}</Link>
+                <React.Fragment key={l.label}>{renderLink(l)}</React.Fragment>
               ))}
             </div>
           </div>

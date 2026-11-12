@@ -58,7 +58,7 @@ const contactStyles = `
   }
 
   /* ════════════════════════════════════
-     FORM FIELDS — light solid fill, dark text (matches hero)
+     FORM FIELDS,  light solid fill, dark text (matches hero)
      ════════════════════════════════════ */
   .field-wrap { position: relative; }
 
@@ -398,7 +398,7 @@ const contactStyles = `
   }
 
   /* ════════════════════════════════════
-     PHONE CARD — animated like the phone CTA
+     PHONE CARD,  animated like the phone CTA
      ════════════════════════════════════ */
   .ct-phone-outer {
     position: relative;
@@ -794,7 +794,7 @@ const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message || !form.service) {
-      setError("Please fill in all required fields — Name, Email, Service, and Message.");
+      setError("Please fill in all required fields,  Name, Email, Service, and Message.");
       return;
     }
     setLoading(true);
@@ -810,7 +810,7 @@ const ContactForm: React.FC = () => {
           "Phone Number": form.phone,
           "Service Name": form.service,
           Message: form.message,
-          
+
         }),
       });
 
@@ -884,13 +884,13 @@ const ContactForm: React.FC = () => {
           {/* ── MAIN GRID ── */}
           <div className="ct-grid">
 
-            {/* LEFT — Info cards */}
+            {/* LEFT,  Info cards */}
             <div
               style={{ opacity: visible ? 1 : 0, animation: visible ? "fadeLeft 0.9s ease 0.3s forwards" : "none" }}
             >
               <div className="ct-info-cards">
 
-                {/* Phone — animated CTA card */}
+                {/* Phone,  animated CTA card */}
                 <div className="ct-phone-outer">
                   {PHONE_PARTICLES.map((p, i) => (
                     <span
@@ -930,7 +930,7 @@ const ContactForm: React.FC = () => {
               </div>
             </div>
 
-            {/* RIGHT — Form */}
+            {/* RIGHT,  Form */}
             <div
               style={{ opacity: visible ? 1 : 0, animation: visible ? "fadeRight 0.9s ease 0.4s forwards" : "none" }}
             >
@@ -988,7 +988,7 @@ const ContactForm: React.FC = () => {
                       <label htmlFor="ct-message" className="field-label field-label-textarea">Your Message *</label>
                     </div>
 
-                    <label style={{display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "12px", lineHeight: 1.5, color: "#6b7280", textAlign: "left", marginTop: "8px",}}>
+                    <label style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "12px", lineHeight: 1.5, color: "#6b7280", textAlign: "left", marginTop: "8px", }}>
                       <input
                         type="checkbox"
                         name="terms_accepted"

@@ -86,7 +86,7 @@ const animStyles = `
   .hero-book-card-item { width: 110px; height: 165px; margin: 0 5px; border-radius: 8px; }
 
   /* ════════════════════════════════════
-     BASE — Small Mobile (≤ 479px)
+     BASE,  Small Mobile (≤ 479px)
      ════════════════════════════════════ */
   .hero-section {
     position: relative;
@@ -299,7 +299,7 @@ const animStyles = `
     gap: 12px;
   }
 
-  /* ── Floating label field — light solid fill, dark text ── */
+  /* ── Floating label field,  light solid fill, dark text ── */
   .hf-field-wrap { position: relative; }
 
   .hf-field-input {
@@ -672,9 +672,8 @@ const HeroBookCard: React.FC<{ src: string; title: string }> = ({ src, title }) 
   <div className="hero-book-card hero-book-card-item">
     <img
       src={src}
-      alt=""
-      aria-hidden="true"
-      data-title={title}
+      alt={title.replace(/\s+/g, "-")}
+      title={title}
       style={{ width: "100%", height: "100%" }}
       onError={(e) => {
         const t = e.currentTarget;
@@ -928,7 +927,7 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* RIGHT — glass form */}
+          {/* RIGHT,  glass form */}
           <div className="hero-form">
             <p className="hero-form-title">Get Started Today</p>
             <p className="hero-form-sub">Tell us about your book and we'll get back to you with a quote.</p>
@@ -966,31 +965,31 @@ const Hero: React.FC = () => {
                 onChange={(val) => { setForm(f => ({ ...f, service: val })); if (error) setError(""); }}
               />
 
-              <label style={{display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "12px", lineHeight: 1.5, color: "#6b7280", textAlign: "left", marginTop: "8px",}}>
-                      <input
-                        type="checkbox"
-                        name="terms_accepted"
-                        value="yes"
-                        checked
-                        readOnly
-                        onClick={(e) => e.preventDefault()}
-                        style={{ marginTop: "2px", flexShrink: 0, accentColor: "#dce1e8" }}
-                      />
-                      <span>
-                        By checking this box and submitting this form, I confirm that I have read
-                        and agree to the{" "}
-                        <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
-                          Privacy Policy
-                        </a>
-                        , and I consent to being contacted by phone, email, or text message
-                        regarding my inquiry. Message and data rates may apply. Consent is not a
-                        condition of purchase.
-                      </span>
-                    </label>
+              <label style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "12px", lineHeight: 1.5, color: "#6b7280", textAlign: "left", marginTop: "8px", }}>
+                <input
+                  type="checkbox"
+                  name="terms_accepted"
+                  value="yes"
+                  checked
+                  readOnly
+                  onClick={(e) => e.preventDefault()}
+                  style={{ marginTop: "2px", flexShrink: 0, accentColor: "#dce1e8" }}
+                />
+                <span>
+                  By checking this box and submitting this form, I confirm that I have read
+                  and agree to the{" "}
+                  <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
+                    Terms of Service
+                  </a>{" "}
+                  and{" "}
+                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
+                    Privacy Policy
+                  </a>
+                  , and I consent to being contacted by phone, email, or text message
+                  regarding my inquiry. Message and data rates may apply. Consent is not a
+                  condition of purchase.
+                </span>
+              </label>
 
               {error && (
                 <div className="hf-error" role="alert">

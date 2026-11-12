@@ -132,6 +132,22 @@ const sections: PolicySection[] = [
     ),
   },
   {
+    id: "pseudonym-policy",
+    title: "Pseudonym Policy",
+    content: (
+      <>
+        <p>We follow a pseudonym policy to ensure consistency, convenience, and a seamless communication experience for our customers.</p>
+        <p>To avoid confusion or inconvenience when a customer is assigned a new account manager, we use pseudonyms to maintain a consistent point of contact. This allows our customers to build familiarity, maintain continuity in communication, and easily remember the names of their representatives.</p>
+        <p>Additionally, as our team consists of professionals from diverse geographical regions and cultural backgrounds, using pseudonyms helps us maintain a consistent and unified organizational identity while ensuring a professional and standardized customer experience.</p>
+        <p><strong>Opt-Out</strong></p>
+        <ul>
+          <li>You can opt out of SMS communications at any time by replying "STOP" to any text message you receive from us.</li>
+          <li>To unsubscribe from our email communications, click the "Unsubscribe" link included in any of our emails or contact us directly at <b>info@bristolpublishers.com.</b> </li>
+        </ul>
+      </>
+    ),
+  },
+  {
     id: "changes",
     title: "Changes to this policy",
     content: (
@@ -157,7 +173,7 @@ const PrivacyPolicy: React.FC = () => (
     updated="October 1, 2026"
     intro={
       <>
-        <p>This Privacy Policy explains how Bristol Publishers ("we", "us", "our") collects, uses and protects your personal information when you visit our website or use our writing, editing, design, publishing, marketing and audiobook services. It also explains how we use website analytics.</p>
+        <p>This Privacy Policy explains how BristolPublishers ("we", "us", "our") collects, uses and protects your personal information when you visit our website or use our writing, editing, design, publishing, marketing and audiobook services. It also explains how we use website analytics.</p>
         <p>By using our website or services, you agree to the practices described here.</p>
       </>
     }

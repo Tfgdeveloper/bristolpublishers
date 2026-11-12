@@ -84,7 +84,7 @@ const portfolioStyles = `
   }
 
   /* ════════════════════════════════════
-     BASE — Small Mobile (≤ 479px)
+     BASE,  Small Mobile (≤ 479px)
      ════════════════════════════════════ */
 
   .pf-section {
@@ -179,7 +179,7 @@ const portfolioStyles = `
     z-index: 1;
   }
 
-  /* Card sizes via CSS vars — overridden per breakpoint */
+  /* Card sizes via CSS vars,  overridden per breakpoint */
   .pf-book-card {
     --card-w: 130px;
     --card-h: 195px;
@@ -451,7 +451,8 @@ const BookCard: React.FC<{ item: { src: string; title: string; genre: string } }
     >
       <img
         src={item.src}
-        alt={item.title}
+        alt={item.title.replace(/\s+/g, "-")}
+        title={item.title}
         onError={e => {
           const t = e.currentTarget;
           t.style.display = "none";
@@ -606,7 +607,7 @@ const Portfolio: React.FC = () => {
         <div className="pf-orb-tl" />
         <div className="pf-orb-br" />
         <div className="pf-grid-bg" />
-        
+
 
         {/* ── HEADER ── */}
         <div className="pf-container">

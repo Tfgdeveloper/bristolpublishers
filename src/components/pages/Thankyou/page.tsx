@@ -618,7 +618,7 @@ const ThankYou: React.FC = () => {
                 </svg>
               </div>
               <div>
-                <p className="ty-step-title">We Reach Out — Within 24 Hours</p>
+                <p className="ty-step-title">We Reach Out,  Within 24 Hours</p>
                 <p className="ty-step-desc">Expect a personal call or email to discuss your project and map out the next steps together.</p>
               </div>
             </div>

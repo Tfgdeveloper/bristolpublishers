@@ -113,7 +113,7 @@ const qmStyles = `
   .qm-fields { display: flex; flex-direction: column; gap: 14px; }
   .qm-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
 
-  /* ── Fields — light solid fill, dark text ── */
+  /* ── Fields,  light solid fill, dark text ── */
   .qm-field { position: relative; }
 
   .qm-input {
@@ -351,7 +351,7 @@ const qmStyles = `
 `;
 
 /* ════════════════════════════════════
-   OPEN / CLOSE — works from any component, no context needed.
+   OPEN / CLOSE,  works from any component, no context needed.
    Buttons fire a browser event; the provider (mounted once in App) listens.
    ════════════════════════════════════ */
 const OPEN_EVENT = "bp:open-quote-modal";
@@ -522,7 +522,7 @@ const QuoteModal: React.FC<{ initialService: string; onClose: () => void }> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.email || !form.service || !form.message) {
-      setError("Please fill in all required fields — Name, Phone, Email, Service, and Message.");
+      setError("Please fill in all required fields,  Name, Phone, Email, Service, and Message.");
       return;
     }
     if (form.phone.replace(/\D/g, "").length < 7) {
@@ -632,31 +632,31 @@ const QuoteModal: React.FC<{ initialService: string; onClose: () => void }> = ({
                 <label htmlFor="qm-message" className="qm-label qm-label-textarea">Your Message *</label>
               </div>
 
-              <label style={{display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "12px", lineHeight: 1.5, color: "#6b7280", textAlign: "left", marginTop: "8px",}}>
-                      <input
-                        type="checkbox"
-                        name="terms_accepted"
-                        value="yes"
-                        checked
-                        readOnly
-                        onClick={(e) => e.preventDefault()}
-                        style={{ marginTop: "2px", flexShrink: 0, accentColor: "#dce1e8" }}
-                      />
-                      <span>
-                        By checking this box and submitting this form, I confirm that I have read
-                        and agree to the{" "}
-                        <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
-                          Terms of Service
-                        </a>{" "}
-                        and{" "}
-                        <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
-                          Privacy Policy
-                        </a>
-                        , and I consent to being contacted by phone, email, or text message
-                        regarding my inquiry. Message and data rates may apply. Consent is not a
-                        condition of purchase.
-                      </span>
-                    </label>
+              <label style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "12px", lineHeight: 1.5, color: "#6b7280", textAlign: "left", marginTop: "8px", }}>
+                <input
+                  type="checkbox"
+                  name="terms_accepted"
+                  value="yes"
+                  checked
+                  readOnly
+                  onClick={(e) => e.preventDefault()}
+                  style={{ marginTop: "2px", flexShrink: 0, accentColor: "#dce1e8" }}
+                />
+                <span>
+                  By checking this box and submitting this form, I confirm that I have read
+                  and agree to the{" "}
+                  <a href="/terms-of-service" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
+                    Terms of Service
+                  </a>{" "}
+                  and{" "}
+                  <a href="/privacy-policy" target="_blank" rel="noopener noreferrer" style={{ color: "inherit", textDecoration: "underline" }}>
+                    Privacy Policy
+                  </a>
+                  , and I consent to being contacted by phone, email, or text message
+                  regarding my inquiry. Message and data rates may apply. Consent is not a
+                  condition of purchase.
+                </span>
+              </label>
 
               {error && (
                 <div className="qm-error" role="alert">

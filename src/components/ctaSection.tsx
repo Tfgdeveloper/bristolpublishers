@@ -64,7 +64,7 @@ const ctaStyles = `
   }
 
   /* ════════════════════════════════════
-     BASE — Small Mobile (≤ 479px)
+     BASE,  Small Mobile (≤ 479px)
      ════════════════════════════════════ */
 
   .cta-section {
@@ -191,7 +191,7 @@ const ctaStyles = `
     padding: 10px 26px;
   }
 
-  /* Mockup image — hidden on small mobile, shown from tablet up */
+  /* Mockup image,  hidden on small mobile, shown from tablet up */
   .cta-mockup {
     display: none;
   }
@@ -482,22 +482,23 @@ const CTABanner: React.FC = () => {
                 style={{ opacity: visible ? 1 : 0, animation: visible ? "fadeUp 0.7s ease 0.45s forwards" : "none" }}
               >
                 {/* <button className="cta-btn-primary">SUBMIT MANUSCRIPT</button> */}
-                
+
                 <button
-                type="button"
-                className="hero-cta-primary"
-                onClick={() => openQuoteModal()}
-              >
-                REQUEST CONSULTATION
-              </button>
+                  type="button"
+                  className="hero-cta-primary"
+                  onClick={() => openQuoteModal()}
+                >
+                  REQUEST CONSULTATION
+                </button>
               </div>
             </div>
 
-            {/* ── MOCKUP IMAGE — hidden on mobile, visible tablet+ ── */}
+            {/* ── MOCKUP IMAGE,  hidden on mobile, visible tablet+ ── */}
             <div className="cta-mockup">
               <img
                 src="/images/Portfolio/MOCKUP.png"
-                alt="Book and tablet mockup"
+                alt="Book-and-tablet-mockup"
+                title="Book and tablet mockup"
               />
             </div>
 

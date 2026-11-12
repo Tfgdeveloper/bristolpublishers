@@ -17,7 +17,7 @@ const logoBarStyle = `
   }
 
   /* ════════════════════════════════════
-     BASE — Small Mobile (≤ 479px)
+     BASE,  Small Mobile (≤ 479px)
      ════════════════════════════════════ */
   .lb-wrap {
     background-color: #FF4545;
@@ -97,11 +97,11 @@ const logoBarStyle = `
 `;
 
 const logos = [
-  { src: "/images/logo/Kobo.png", alt: "Kobo" },
-  { src: "/images/logo/Amazon.png", alt: "Amazon" },
-  { src: "/images/logo/AppleBooks.png", alt: "Apple Books" },
-  { src: "/images/logo/Barnes.png", alt: "Barnes & Noble" },
-  { src: "/images/logo/Ingram.png", alt: "IngramSpark" },
+  { src: "/images/logo/Kobo.png", alt: "Kobo" , title:"Kobo" },
+  { src: "/images/logo/Amazon.png", alt: "Amazon", title:"Amazon" },
+  { src: "/images/logo/AppleBooks.png", alt: "Apple-Books", title:"Apple Books" },
+  { src: "/images/logo/Barnes.png", alt: "Barnes-&-Noble", title:"Barners & Noble" },
+  { src: "/images/logo/Ingram.png", alt: "IngramSpark", title:"IngramSpark" },
 ];
 
 const allLogos = [...logos, ...logos, ...logos, ...logos, ...logos];
@@ -117,6 +117,7 @@ const LogoBar: React.FC = () => {
               <img
                 src={logo.src}
                 alt={logo.alt}
+                title={logo.title}
                 className="lb-logo-img"
               />
             </div>

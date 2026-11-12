@@ -69,7 +69,7 @@ const servicesStyles = `
   .featured-card:hover { box-shadow: 0 30px 80px rgba(255,69,69,0.4), 0 0 60px rgba(255,69,69,0.25) !important; }
 
   /* ════════════════════════════════════
-     BASE — Small Mobile (≤ 479px)
+     BASE,  Small Mobile (≤ 479px)
      ════════════════════════════════════ */
 
   .srv-section {
@@ -805,12 +805,12 @@ const Services: React.FC = () => {
           >
             <p className="srv-cta-heading">Not sure where to begin? Let’s guide your next step.</p>
             <button
-                type="button"
-                className="hero-cta-primary"
-                onClick={() => openQuoteModal()}
-              >
-               BEGIN YOUR FREE CONSULTATION
-              </button>
+              type="button"
+              className="hero-cta-primary"
+              onClick={() => openQuoteModal()}
+            >
+              BEGIN YOUR FREE CONSULTATION
+            </button>
           </div>
 
         </div>

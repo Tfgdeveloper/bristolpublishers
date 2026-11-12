@@ -6,10 +6,9 @@ import Navbar from "./components/navbar";
 import FooterSection from "./components/footerSection";
 import { QuoteModalProvider } from "./components/Quotemodal";
 import ImagePopup from "./components/Imagepopup";
-import { Feather } from "lucide-react";
+import Seo, { type SeoKey } from "./components/Seo";
 
 const Hero = lazy(() => import("./components/hero"));
-const LogoBar = lazy(() => import("./components/logobar"));
 const AboutSection = lazy(() => import("./components/aboutSection"));
 const Services = lazy(() => import("./components/serviceSection"));
 const Portfolio = lazy(() => import("./components/portfolioSection"));
@@ -22,6 +21,16 @@ const TermsOfService = lazy(() => import("./components/pages/Policies/Termsofser
 const RefundPolicy = lazy(() => import("./components/pages/Policies/Refundpolicy"));
 const Frankfurt = lazy(() => import("./components/FrankfurtSection"));
 const Cta = lazy(() => import("./components/Cta"));
+
+const AboutPage = lazy(() => import("./components/pages/About/page"));
+const PublishingPage = lazy(() => import("./components/pages/services/publishing/page"));
+const GhostwritingPage = lazy(() => import("./components/pages/services/ghostwriting/page"));
+const FormattingPage = lazy(() => import("./components/pages/services/formatting/page"));
+const CoverDesignPage = lazy(() => import("./components/pages/services/cover-design/page"));
+const MarketingPage = lazy(() => import("./components/pages/services/marketing/page"));
+const AudioBookPage = lazy(() => import("./components/pages/services/audio-book/page"));
+const PortfolioPage = lazy(() => import("./components/pages/portfolio/page"));
+const ContactPage = lazy(() => import("./components/pages/contact/page"));
 
 const Loader = () => {
   return (
@@ -39,20 +48,35 @@ const Loader = () => {
   );
 };
 
+/* Inner pages get the same Navbar + Footer as the home page, plus their own SEO tags */
+const withSuspense = (Component: React.FC, seo: SeoKey) => (
+  <>
+    <Seo page={seo} />
+    <Navbar />
+    <Suspense fallback={<Loader />}>
+      <Component />
+    </Suspense>
+    <FooterSection />
+  </>
+);
+
+/* New page always opens at the top (hash links like /#about still scroll to their section) */
+const ScrollToTop: React.FC = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+};
+
 const HomePage: React.FC = () => {
   return (
     <Suspense fallback={<Loader />}>
-      <title>Professional Book Publishing Services | Bristol Publishers</title>
-      <meta name="description" content="Turn your manuscript into a published book. Bristol Publishers offers ghostwriting, editing, cover design, formatting, marketing and global distribution." />
-      <meta
-        name="keywords"
-        content="Bristol Publishers"
-      />
-      <ImagePopup/>
+      <ImagePopup />
       <Hero />
       <AboutSection />
-      <Cta/>
-      <Frankfurt/>
+      <Cta />
+      <Frankfurt />
       <Services />
       <Portfolio />
       <CTASection />
@@ -90,6 +114,7 @@ const MainLayout: React.FC = () => {
 
   return (
     <>
+      <Seo page="home" />
       <Navbar />
       <HomePage />
       <FooterSection />
@@ -137,16 +162,6 @@ function App() {
   const [chatVisibility, setChatVisibility] = useState<ChatVisibility>("minimized");
   const [pendingOpen, setPendingOpen] = useState(false);
 
-  // OPTIONAL: auto-open the chat 1 second after page load.
-  // Uncomment if you want the chat to open on every visit.
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setChatVisibility("maximized");
-  //     forceOpenChat();
-  //   }, 1000);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   // Force the chat open whenever an agent sends a message
   const handleNewEvent = useCallback(
     (event: { type: string; author?: { type: string } }) => {
@@ -156,13 +171,11 @@ function App() {
       setChatVisibility("maximized");
       forceOpenChat();
 
-      // Visitor is on another tab: flash the title and open when they return
       if (document.hidden) setPendingOpen(true);
     },
     []
   );
 
-  // Keep state in sync when the visitor opens/closes the chat manually
   const handleVisibilityChanged = useCallback(
     ({ visibility }: { visibility: ChatVisibility }) => {
       setChatVisibility(visibility);
@@ -171,7 +184,6 @@ function App() {
     []
   );
 
-  // Title flash + open-on-return while a message is waiting
   useEffect(() => {
     if (!pendingOpen) return;
 
@@ -207,14 +219,25 @@ function App() {
       />
 
       <BrowserRouter>
-        {/* Must be inside BrowserRouter: the popup redirects to /thank-you */}
+        <ScrollToTop />
         <QuoteModalProvider>
           <Routes>
             <Route path="/" element={<MainLayout />} />
+            <Route path="/about" element={withSuspense(AboutPage, "about")} />
+            <Route path="/services/publishing" element={withSuspense(PublishingPage, "publishing")} />
+            <Route path="/services/ghostwriting" element={withSuspense(GhostwritingPage, "ghostwriting")} />
+            <Route path="/services/formatting" element={withSuspense(FormattingPage, "formatting")} />
+            <Route path="/services/cover-design" element={withSuspense(CoverDesignPage, "coverDesign")} />
+            <Route path="/services/marketing" element={withSuspense(MarketingPage, "marketing")} />
+            <Route path="/services/audio-book" element={withSuspense(AudioBookPage, "audioBook")} />
+            <Route path="/portfolio" element={withSuspense(PortfolioPage, "portfolio")} />
+            <Route path="/contact" element={withSuspense(ContactPage, "contact")} />
             <Route
               path="/thank-you"
               element={
                 <Suspense fallback={<Loader />}>
+                  <title>Thank You | Bristol Publishers</title>
+                  <meta name="robots" content="noindex, nofollow" />
                   <ThankYou />
                 </Suspense>
               }
