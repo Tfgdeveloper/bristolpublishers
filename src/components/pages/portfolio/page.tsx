@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import SplitText from "@/components/SplitText";
 import ContactForm from "@/components/contactSection";
+import { openQuoteModal } from "@/components/Quotemodal";
 
 const pageStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
@@ -417,7 +418,7 @@ const PortfolioHero: React.FC = () => {
                     </p>
                     <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", opacity: visible ? 1 : 0, animation: visible ? "ap-fadeUp .7s ease .5s forwards" : "none" }}>
                         <button className="ap-btn-primary" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 700, fontSize: ".92rem", letterSpacing: ".08em", padding: "14px 42px", borderRadius: "999px", background: "linear-gradient(90deg,#fe5858 0%,#FF4545 100%)", color: "#fff", border: "none", cursor: "pointer", boxShadow: "0 8px 28px rgba(255,69,69,.4)" }}>View Showcase</button>
-                        <button className="ap-btn-outline" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: ".92rem", letterSpacing: ".06em", padding: "13px 42px", borderRadius: "999px", background: "transparent", color: "rgba(255,255,255,.7)", border: "1px solid rgba(255,255,255,.22)", cursor: "pointer" }}>Get A Quote</button>
+                        <button onClick={() => openQuoteModal()} className="ap-btn-outline" style={{ fontFamily: "'Montserrat',sans-serif", fontWeight: 600, fontSize: ".92rem", letterSpacing: ".06em", padding: "13px 42px", borderRadius: "999px", background: "transparent", color: "rgba(255,255,255,.7)", border: "1px solid rgba(255,255,255,.22)", cursor: "pointer" }}>Get A Quote</button>
                     </div>
                 </div>
             </div>
@@ -602,7 +603,7 @@ const PortfolioCTA: React.FC = () => {
                                 Take the next step with confidence. Let us help you complete your book, publish it, and reach the readers who are waiting for your story.
                             </p>
                             <div style={{ display: "flex", gap: "14px", alignItems: "center", flexWrap: "wrap", opacity: visible ? 1 : 0, animation: visible ? "fadeUp 0.7s ease 0.45s forwards" : "none" }}>
-                                <button className="px-10 py-3.5 rounded-full text-white text-sm transition-all duration-200 hover:opacity-90" style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.25em", background: "linear-gradient(90deg, #fe5858e8 0%, #FF4545 100%)" }}>Get Started</button>
+                                <button onClick={() => openQuoteModal()} className="px-10 py-3.5 rounded-full text-white text-sm transition-all duration-200 hover:opacity-90" style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: "0.25em", background: "linear-gradient(90deg, #fe5858e8 0%, #FF4545 100%)" }}>Get Started</button>
                                 <button className="cta-btn-secondary">LEARN MORE</button>
                             </div>
                         </div>
