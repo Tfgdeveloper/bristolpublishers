@@ -2,11 +2,14 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone } from "lucide-react";
 
-const NAV_ITEMS = [
+type NavItem = { label: string; href: string; external?: boolean };
+
+const NAV_ITEMS: NavItem[] = [
   { label: "HOME", href: "/" },
   { label: "ABOUT", href: "/about" },
   { label: "SERVICES", href: "/services" },
   { label: "PORTFOLIO", href: "/portfolio" },
+  { label: "BLOG", href: "https://blogs.bristolpublishers.com", external: true },
   { label: "CONTACT", href: "/contact" },
 ];
 
@@ -486,6 +489,12 @@ const Navbar: React.FC = () => {
                     </div>
                   )}
                 </li>
+              ) : item.external ? (
+                <li key={item.label}>
+                  <a href={item.href} className="nb-link">
+                    {item.label}
+                  </a>
+                </li>
               ) : (
                 <li key={item.label}>
                   <Link
@@ -561,6 +570,10 @@ const Navbar: React.FC = () => {
                   ))}
                 </div>
               </div>
+            ) : item.external ? (
+              <a key={item.label} href={item.href} className="mobile-nav-link">
+                {item.label}
+              </a>
             ) : (
               <Link
                 key={item.label}
